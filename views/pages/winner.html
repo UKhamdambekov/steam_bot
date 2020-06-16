@@ -1,0 +1,64 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    <section class="content">
+        <div class="container-fluid"> 
+            <div class="block-header">
+                <h2>Управление учениками</h2>
+            </div>           
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Ученики
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a class="btn bg-cyan waves-effect" data-toggle="cardloading" data-loading-effect="ios" data-toggle="tooltip" data-placement="bottom" data-original-title="Обновить">
+                                        <i class="material-icons">loop</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div>
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+											<th>ID</th>
+											<th>Ф.И.О.</th>
+											<th>Класс</th>
+											<th>Урок</th>
+											<th>Описание</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>ID</th>
+											<th>Ф.И.О.</th>
+											<th>Класс</th>
+											<th>Урок</th>
+											<th>Описание</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody><?php foreach($students as $student): ?>
+										<tr>
+											<td><?php echo $student['id_winner']; ?></td>
+											<td><?php echo $student['name']; ?></td>
+											<td><?php echo student::classes($student['id']); ?></td>
+											<td><?php echo $student['flag']; ?></td>
+											<td><?php echo $student['about']; ?></td>
+										</tr>
+									<?php endforeach; ?> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+<?php require_once 'views/layouts/footer.html'; ?>

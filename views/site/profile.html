@@ -1,0 +1,76 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Настройки</a></li>
+                                    <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Изменение пароля</a></li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
+                                        <div class="form-horizontal demo-masked-input">
+                                            <div class="form-group">
+                                                <label for="NameSurname" class="col-sm-2 control-label">Логин</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="login" value="<?php echo $_SESSION['login']; ?>" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Email" class="col-sm-2 control-label">Ф.И.О.</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="name" value="<?php echo $_SESSION['name']; ?>" aria-required="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-danger" onclick="change_name(<?php echo $_SESSION['id']; ?>)">Обновить</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="NewPassword" class="col-sm-3 control-label">Новый пароль</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="password" class="form-control" id="NewPassword" placeholder="Новый пароль" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="NewPasswordConfirm" class="col-sm-3 control-label">Новый пароль (Подтверждение)</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="password" class="form-control" id="NewPasswordConfirm" placeholder="Новый пароль (Подтверждение)" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-3 col-sm-9">
+                                                    <button type="submit" class="btn btn-danger" onclick="change_pass(<?php echo $_SESSION['id']; ?>)">Обновить</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php require_once 'views/layouts/footer.html'; ?>

@@ -1,0 +1,106 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    <section class="content">
+        <div class="container-fluid"> 
+            <div class="block-header">
+                <h2>Управление учениками</h2>
+            </div>           
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Ученики
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a class="btn bg-cyan waves-effect" data-toggle="cardloading" data-loading-effect="ios" data-toggle="tooltip" data-placement="bottom" data-original-title="Обновить">
+                                        <i class="material-icons">loop</i>
+                                    </a>
+                                    <button type="button" class="btn bg-green waves-effect" data-toggle="modal" data-target="#send"  data-toggle="tooltip" data-placement="bottom">
+                                        Рассылка сообщений!
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div>
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+											<th>ID</th>
+											<th>Ф.И.О.</th>
+											<th>Класс</th>
+											<th>Статус</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>ID</th>
+											<th>Ф.И.О.</th>
+											<th>Класс</th>
+											<th>Статус</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody><?php foreach($students as $student): ?>
+										<tr>
+											<td><?php echo $student['id']; ?></td>
+											<td><?php echo $student['name']; ?></td>
+											<td><?php echo $student['class']; ?></td>
+                                            <td>
+                                                <?php if($student['status'] == 1): ?>
+                                                    <a href="/students/block/<?php echo $student['id']; ?>">
+                                                        <span class="label label-success">Активен</span>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="/students/active/<?php echo $student['id']; ?>">
+                                                        <span class="label label-danger">Блокирован</span>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </td>
+											<td>
+                                                <a href="/students/delete/<?php echo $student['id']; ?>" class="btn bg-red waves-effect">                                                
+													<i class="material-icons">delete</i>
+                                                </a> 							
+											</td>
+										</tr>
+									<?php endforeach; ?> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+    <!-- Default Size -->
+    <div class="modal fade" id="send" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Рассылка сообщений (только активным ученикам)</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-10 m-l-35">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <textarea name="text" rows="4" class="form-control no-resize" placeholder="Сообщения..."></textarea>
+                                </div>
+                            </div>		                           
+                        </div>
+                    </div><!-- ./row -->
+                </div><!-- ./modal-body -->
+                <div class="modal-footer">
+                    <input type="submit" name="send" class="btn btn-success waves-effect" value="Отправить">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Закрыть</button>
+                </div>
+            </form>
+        </div>
+	</div>
+<?php require_once 'views/layouts/footer.html'; ?>

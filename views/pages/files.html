@@ -1,0 +1,98 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    <section class="content">
+        <div class="container-fluid"> 
+            <div class="block-header">
+                <h2>Управление файламы</h2>
+            </div>           
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <?php if(stristr($_SERVER['REQUEST_URI'], 'images') == TRUE) echo 'Изображение'; 
+                                    else if(stristr($_SERVER['REQUEST_URI'], 'video') == TRUE) echo 'Видео';
+                                    else echo 'Файлы';
+                                ?>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a class="btn bg-cyan waves-effect" data-toggle="cardloading" data-loading-effect="ios" data-toggle="tooltip" data-placement="bottom" data-original-title="Обновить">
+                                        <i class="material-icons">loop</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div>
+                                <table class="table table-bordered table-striped table-hover js-file">
+                                    <thead>
+                                        <tr>
+											<th>ID ученика</th>
+											<th>Тип</th>
+											<th>Файл</th>
+											<th>Дата</th>
+											<th>Урок</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>ID ученика</th>
+											<th>Тип</th>
+											<th>Файл</th>
+											<th>Дата</th>
+											<th>Урок</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php foreach($files as $file): ?>
+										<tr>
+											<td>
+                                                <?php 
+                                                echo student::name($file['id']);
+                                                
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php 
+                                                    if($file['type'] == 1) echo "Фото";
+                                                    else if($file['type'] == 2) echo "Видео";
+                                                    else echo "Незивестно";
+                                                ?>
+                                            </td>
+											<td>
+                                                <a href="<?php echo $file['file']; ?>" target="_blank">
+                                                    <span class="label label-info">Посмотреть</span>
+                                                </a>
+                                            </td>
+											<td><?php echo $file['date']; ?></td>
+											<td><?php echo $file['flag']; ?></td>
+											<td>
+                                                <?php if(files::winner($file['id_file']) == 0): ?>
+                                                <button class="btn bg-green waves-effect" 
+                                                    onclick="winner(<?php echo $file['id_file']; ?>, '<?php echo $file['flag']; ?>')">
+                                                    <i class="material-icons">flag</i>
+                                                </button>
+                                                    <a href="/files/delete/<?php echo $file['id_file']; ?>" class="btn bg-red waves-effect">                                                
+                                                        <i class="material-icons">delete</i>
+                                                    </a> 	
+                                                <?php else: ?>
+                                                    <span class="label label-success">Победитель конкурса</span>                                                    
+                                                <?php endif; ?>						
+											</td>
+										</tr>
+									<?php endforeach; ?> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+<?php require_once 'views/layouts/footer.html'; ?>

@@ -1,0 +1,48 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>Настройки сайта</h2>
+            </div>   
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2> 
+                                Изменение шаблона <?php echo $text['flag']; ?>
+                            </h2>
+                        </div>
+                        <div class="body row">
+                            <form method="POST" class="col-md-6 col-md-offset-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Русский:</span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="ru"  placeholder="Русский текст" value="<?php echo $text['ru']; ?>">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">O'zbekcha:</span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="uz"  placeholder="O'zbekcha yozuv" value="<?php echo $text['uz']; ?>">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">English:</span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="en"  placeholder="English text" value="<?php echo $text['en']; ?>">
+                                    </div>
+                                </div>
+                                <center>
+                                    <input type="submit" name="submit" class="btn btn-lg btn-info" value="Обновить">
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->      
+        </div><!-- ./container-fluid -->
+    </section>
+<?php require_once 'views/layouts/footer.html'; ?>

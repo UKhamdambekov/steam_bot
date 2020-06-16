@@ -1,0 +1,84 @@
+
+    <section>
+      <!-- Left Sidebar -->
+      <aside id="leftsidebar" class="sidebar">
+          <!-- User Info -->
+          <div class="user-info">
+              <div class="info-container">
+                  <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['name']; ?></div>
+                  <div class="btn-group user-helper-dropdown">
+                      <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                      <ul class="dropdown-menu pull-right">
+                          <li><a href="/profile"><i class="material-icons">person</i>Профиль</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="/logout"><i class="material-icons">input</i>Выход</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- #User Info -->
+          <!-- Menu -->
+          <div class="menu">
+              <ul class="list">
+                  <li class="<?php if(strlen($_SERVER['REQUEST_URI']) == 1) echo 'active'; ?>">
+                      <a href="/">
+                          <i class="material-icons">home</i>
+                          <span>Главная</span>
+                      </a>
+                  </li>    
+                  <?php if($_SESSION['role'] == "admin" || $_SESSION['role'] == "moderator"): ?>
+                    <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'students') == TRUE) echo 'active'; ?>">
+                        <a href="/students">
+                            <i class="material-icons">school</i>
+                            <span>Ученики</span>
+                        </a>
+                    </li>   
+                    <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'classes') == TRUE) echo 'active'; ?>">
+                        <a href="/classes">
+                            <i class="material-icons">library_books</i>
+                            <span>Уроки</span>
+                        </a>
+                    </li>   
+                  <?php endif; ?>     
+                  <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'files') == TRUE) echo 'active'; ?>">
+                      <a href="/files">
+                          <i class="material-icons">file_download</i>
+                          <span>Файлы</span>
+                      </a>
+                  </li>      
+                  <?php if($_SESSION['role'] == "admin" || $_SESSION['role'] == "moderator"): ?>
+                    <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'winner') == TRUE) echo 'active'; ?>">
+                        <a href="/winner">
+                            <i class="material-icons">flag</i>
+                            <span>Победители</span>
+                        </a>
+                    </li>   
+                  <?php endif; ?>     
+                  <?php if($_SESSION['role'] == "admin"): ?>
+                    <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'users') == TRUE) echo 'active'; ?>">
+                        <a href="/users">
+                            <i class="material-icons">person</i>
+                            <span>Пользователи</span>
+                        </a>
+                    </li>
+                    <li class="<?php if(stristr($_SERVER['REQUEST_URI'], 'settings') == TRUE) echo 'active'; ?>">
+                        <a href="/settings">
+                            <i class="material-icons">settings</i>
+                            <span>Настройки</span>
+                        </a>
+                    </li>   
+                  <?php endif; ?>        
+              </ul>
+          </div>
+          <!-- #Menu -->
+          <!-- Footer -->
+          <div class="legal">
+              <div class="copyright">
+                  Все права защищены. &copy; <?php echo date("Y"); ?>
+                  <br> Разработка: <a href="http://itgs.uz" target="_blank">IT-Genius</a>
+              </div>
+          </div>
+          <!-- #Footer -->
+      </aside>
+      <!-- #END# Left Sidebar -->
+  </section>

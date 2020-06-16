@@ -1,0 +1,141 @@
+<?php require_once 'views/layouts/header.html'; ?>
+	<?php require_once 'views/layouts/menu.html'; ?>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>Управление уроками</h2>
+            </div>
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Уроки
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a class="btn bg-cyan waves-effect" data-toggle="cardloading" data-loading-effect="ios" data-toggle="tooltip" data-placement="bottom" data-original-title="Обновить">
+                                        <i class="material-icons">loop</i>
+                                    </a>
+                                    <button type="button" class="btn bg-green waves-effect" data-toggle="modal" data-target="#add"  data-toggle="tooltip" data-placement="bottom" data-original-title="Добавить">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div>
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+											<th>ID</th>
+											<th>Команда</th>
+											<th>Русский</th>
+											<th>O'zbekcha</th>
+											<th>English</th>
+											<th>Активность</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>ID</th>
+											<th>Команда</th>
+											<th>Русский</th>
+											<th>O'zbekcha</th>
+											<th>English</th>
+											<th>Активность</th>
+											<th>Действия</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody><?php foreach($classes as $class): ?>
+										<tr>
+											<td><?php echo $class['id']; ?></td>
+											<td><?php echo $class['command']; ?></td>
+											<td><?php echo $class['ru']; ?></td>
+											<td><?php echo $class['uz']; ?></td>
+                                            <td><?php echo $class['en']; ?></td>
+                                            <td>                                                
+                                                <?php if($class['active'] == 1): ?>
+                                                    <button class="btn bg-green waves-effect" 
+                                                        onclick="classes_deactive(<?php echo $class['id']; ?>)">
+                                                            Активен
+                                                    </button>  
+                                                <?php else: ?>
+                                                    <button class="btn bg-red waves-effect" 
+                                                        onclick="classes_active(<?php echo $class['id']; ?>)">
+                                                            Блокирован
+                                                    </button>                                        
+                                                <?php endif; ?>
+                                            </td>
+											<td>         
+                                                <?php if($class['active'] == 1): ?>     
+                                                    <span class="label label-danger">Активный урок</span>  
+                                                <?php else: ?>     
+                                                <button class="btn bg-red waves-effect" 
+                                                    onclick="classes_deleted(<?php echo $class['id']; ?>)">
+                                                    <i class="material-icons">delete</i>
+                                                </button>                                         
+                                                <?php endif; ?>  
+											</td>
+										</tr>
+									<?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+    <!-- Default Size -->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Добавление урока</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-10 m-l-35">
+                            
+                            <div class="form-group form-float">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">/</span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="command" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="ru" required>
+                                    <label class="form-label">Русский</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="en" required>
+                                    <label class="form-label">English</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="uz" required>
+                                    <label class="form-label">O'zbekcha</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- ./row -->
+                </div><!-- ./modal-body -->
+                <div class="modal-footer">
+                    <input type="submit" name="submit" class="btn btn-success waves-effect" value="Добавить">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Закрыть</button>
+                </div>
+            </form>
+        </div>
+	</div>
+<?php require_once 'views/layouts/footer.html'; ?>
